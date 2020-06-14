@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const covidRouter = require("./src/endpoints/covid");
 
