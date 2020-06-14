@@ -1,30 +1,18 @@
-const express = require('express')
-const axios = require('axios')
+const express = require("express");
+const covidRouter = require("./src/endpoints/covid");
 
 const PORT = 3000;
-const covid_URL_API = 'https://corona.lmao.ninja/v2/countries/Dominican%20Republic'
 
-const app = express()
+const app = express();
 
-app.get('/all', async (req, res) => {
-  const covidData = await axios.get(covid_URL_API);
+app.use((req, res, next) => {
+  console.log("consultando api");
 
-  res.json(covidData.data)
-})
+  next();
+});
 
-app.get('/data/:query', async(req, res) => {
-  const data = await axios.get(covid_URL_API).then(axiosRes => axiosRes.data);
-
-  if(data.hasOwnProperty(req.params.query)) {
-    return res.json({
-      [req.params.query]: data[req.params.query]
-    })
-  }
-
-  return res.send('property not found')
-})
+app.use("/covid", covidRouter);
 
 app.listen(PORT, () => {
-  console.log(`servidor corriendo en el puerto: ${PORT}`)
-})
-
+  console.log(`servidor corriendo en el puerto: ${PORT}`);
+});
