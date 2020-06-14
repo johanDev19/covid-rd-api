@@ -1,6 +1,5 @@
 const express = require('express')
 const axios = require('axios')
-const bodyParser = require('body-parser')
 
 const PORT = 3000;
 const covid_URL_API = 'https://corona.lmao.ninja/v2/countries/Dominican%20Republic'
