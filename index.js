@@ -15,7 +15,7 @@ app.get('/all', async (req, res) => {
 
 app.get('/data/:query', async(req, res) => {
   const data = await axios.get(covid_URL_API).then(axiosRes => axiosRes.data);
-  
+
   if(data.hasOwnProperty(req.params.query)) {
     return res.json({
       [req.params.query]: data[req.params.query]
